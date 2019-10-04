@@ -7,6 +7,10 @@ import com.badlogic.gdx.graphics.Texture;
 
 public class Hero extends Perso {
 
+    public Hero () {
+        
+    }
+
     public Hero(float x, float y, Texture t, int speed) {
 
         super(x, y, t, speed);
