@@ -1,5 +1,7 @@
 package fr.valarep.valaga;
 
+import java.util.ArrayList;
+
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
@@ -10,10 +12,8 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public class Valaga extends ApplicationAdapter {
   SpriteBatch batch;
-  Enemy link;
-  Hero ganondorf;
-  Enemy zelda;
-  Enemy midona;
+  Hero link;
+  ArrayList<Enemy> cocottes;
   boolean gameOver = false;
   
 
@@ -23,12 +23,27 @@ public class Valaga extends ApplicationAdapter {
   @Override
   public void create() {
     batch = new SpriteBatch();
-    link = new Enemy(0.0f, 0.0f, new Texture("Link.png"), 20);
-    
-    ganondorf = new Hero(0.0f, Gdx.graphics.getHeight() - 100, new Texture("Ganondorf.png"), 10);
-    zelda = new Enemy(Gdx.graphics.getWidth() - 100, Gdx.graphics.getHeight() - 100, new Texture("zelda.png"), 20);
-    midona = new Enemy(Gdx.graphics.getWidth() - 100, 0.0f, new Texture("Midona.png"), 20);
+    link = new Hero(0.0f, 0.0f, new Texture("Link.png"), 10);
+    cocottes = new ArrayList<Enemy>();
 
+    cocottes.add(new Enemy(0.0f, Gdx.graphics.getHeight() - 100, new Texture("Cocotte.png"), 20));
+    cocottes.add(new Enemy(Gdx.graphics.getWidth() - 100, Gdx.graphics.getHeight() - 100, new Texture("Cocotte.png"), 20));
+    cocottes.add(new Enemy(Gdx.graphics.getWidth() - 100, 0.0f, new Texture("Cocotte.png"), 20));
+    cocottes.add(new Enemy(0.0f, Gdx.graphics.getHeight() - 100, new Texture("Cocotte.png"), 20));
+    cocottes.add(new Enemy(Gdx.graphics.getWidth() - 100, Gdx.graphics.getHeight() - 100, new Texture("Cocotte.png"), 20));
+    cocottes.add(new Enemy(Gdx.graphics.getWidth() - 100, 0.0f, new Texture("Cocotte.png"), 20));
+    cocottes.add(new Enemy(0.0f, Gdx.graphics.getHeight() - 100, new Texture("Cocotte.png"), 20));
+    cocottes.add(new Enemy(Gdx.graphics.getWidth() - 100, Gdx.graphics.getHeight() - 100, new Texture("Cocotte.png"), 20));
+    cocottes.add(new Enemy(Gdx.graphics.getWidth() - 100, 0.0f, new Texture("Cocotte.png"), 20));
+    cocottes.add(new Enemy(0.0f, Gdx.graphics.getHeight() - 100, new Texture("Cocotte.png"), 20));
+    cocottes.add(new Enemy(Gdx.graphics.getWidth() - 100, Gdx.graphics.getHeight() - 100, new Texture("Cocotte.png"), 20));
+    cocottes.add(new Enemy(Gdx.graphics.getWidth() - 100, 0.0f, new Texture("Cocotte.png"), 20));
+    cocottes.add(new Enemy(0.0f, Gdx.graphics.getHeight() - 100, new Texture("Cocotte.png"), 20));
+    cocottes.add(new Enemy(Gdx.graphics.getWidth() - 100, Gdx.graphics.getHeight() - 100, new Texture("Cocotte.png"), 20));
+    cocottes.add(new Enemy(Gdx.graphics.getWidth() - 100, 0.0f, new Texture("Cocotte.png"), 20));
+    cocottes.add(new Enemy(0.0f, Gdx.graphics.getHeight() - 100, new Texture("Cocotte.png"), 20));
+    cocottes.add(new Enemy(Gdx.graphics.getWidth() - 100, Gdx.graphics.getHeight() - 100, new Texture("Cocotte.png"), 20));
+    cocottes.add(new Enemy(Gdx.graphics.getWidth() - 100, 0.0f, new Texture("Cocotte.png"), 20));
   }
 
   @Override
@@ -40,30 +55,42 @@ public class Valaga extends ApplicationAdapter {
     updatePositions();
 
     RenderLogo(link);
-    RenderLogo(ganondorf);
-    RenderLogo(zelda);
-    RenderLogo(midona);
+
+    for (Enemy enemy : cocottes) {
+      RenderLogo(enemy);
+    }
   }
+
+
+
+  @Override
+  public void dispose() {
+
+    batch.dispose();
+    link.dispose();
+    
+    for (Enemy enemy : cocottes) {
+      enemy.dispose();
+    }
+  }
+
 
   private void updatePositions() {
 
     link.position();
-    ganondorf.position();
-    zelda.position();
-    midona.position();
+    for (Enemy enemy : cocottes) {
+      enemy.position();
+    }
 
-    InCollision(ganondorf, link);
-    InCollision(ganondorf, zelda);
-    InCollision(ganondorf, midona);
-
+    for (Enemy enemy : cocottes) {
+      InCollision(link, enemy);
+    }
   }
 
   private void InCollision(Hero hero, Enemy enemy) {
 
     if (hero.inCollisionWith(enemy)) {
-
       gameOver = true;
-
     }
   }
 
@@ -75,21 +102,11 @@ public class Valaga extends ApplicationAdapter {
     else {
       perso.draw(batch);
     }
-    
   }
 
   private void gameOver() {
     batch.begin();
     batch.draw(new Texture("game_over.jpg"), 325, 300);
     batch.end();
-  }
-
-  @Override
-  public void dispose() {
-    batch.dispose();
-    link.dispose();
-    ganondorf.dispose();
-    zelda.dispose();
-    midona.dispose();
   }
 }
