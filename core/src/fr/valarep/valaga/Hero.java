@@ -42,12 +42,14 @@ public class Hero extends Perso {
         if (left){
 
             x -= speed;
+            this.texture = new Texture("LinkLeft.png");
             super.position();
         }
 
         if (right){
         
             x += speed;
+            this.texture = new Texture("LinkRight.png");
             super.position();
         }
 
@@ -56,7 +58,7 @@ public class Hero extends Perso {
             y -= speed;
             super.position();
         }
-        
+
         if (up){
 
             y += speed;

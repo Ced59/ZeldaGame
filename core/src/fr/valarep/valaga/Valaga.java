@@ -22,15 +22,13 @@ public class Valaga extends ApplicationAdapter {
   @Override
   public void create() {
     batch = new SpriteBatch();
-    link = new Hero(0.0f, 0.0f, new Texture("Link.png"), 10);
+    link = new Hero(0.0f, 0.0f, new Texture("LinkRight.png"), 10);
     zelda = new Goal(Gdx.graphics.getWidth() - 60 , Gdx.graphics.getHeight() - 100, new Texture("zelda.png"), 10);
     cocottes = new ArrayList<Enemy>();
     
-    cocottes.add(new Enemy(0.0f, Gdx.graphics.getHeight() - 50, new Texture("Cocotte.png"), 20));
-    cocottes.add(new Enemy(Gdx.graphics.getWidth() /2, Gdx.graphics.getHeight() /2, new Texture("Cocotte.png"), 20));
-    cocottes.add(new Enemy(Gdx.graphics.getWidth() - 50, 0.0f, new Texture("Cocotte.png"), 20));
-    
-    
+    cocottes.add(new Enemy(0.0f, Gdx.graphics.getHeight() - 50, new Texture("CocotteRight.png"), 20));
+    cocottes.add(new Enemy(Gdx.graphics.getWidth() /2, Gdx.graphics.getHeight() /2, new Texture("CocotteRight.png"), 20));
+    cocottes.add(new Enemy(Gdx.graphics.getWidth() - 50, 0.0f, new Texture("CocotteRight.png"), 20));
     
   }
   
@@ -85,12 +83,12 @@ public class Valaga extends ApplicationAdapter {
     
     if (hero.inCollisionWith(goal)) {
       
-      link = new Hero(0.0f, 0.0f, new Texture("Link.png"), 10);
-      zelda = new Goal(Gdx.graphics.getWidth() - 60 , Gdx.graphics.getHeight() - 100, new Texture("zelda.png"), 10);
+      link = new Hero(0.0f, 0.0f, new Texture("LinkRight.png"), 10);
+      // zelda = new Goal(Gdx.graphics.getWidth() - 60 , Gdx.graphics.getHeight() - 100, new Texture("zelda.png"), 10);
       
-      cocottes.add(new Enemy(0.0f, Gdx.graphics.getHeight() - 50, new Texture("Cocotte.png"), 20));
-      cocottes.add(new Enemy(Gdx.graphics.getWidth() /2, Gdx.graphics.getHeight() /2, new Texture("Cocotte.png"), 20));
-      cocottes.add(new Enemy(Gdx.graphics.getWidth() - 50, 0.0f, new Texture("Cocotte.png"), 20));
+      cocottes.add(new Enemy(0.0f, Gdx.graphics.getHeight() - 50, new Texture("CocotteRight.png"), 20));
+      cocottes.add(new Enemy(Gdx.graphics.getWidth() /2, Gdx.graphics.getHeight() /2, new Texture("CocotteRight.png"), 20));
+      cocottes.add(new Enemy(Gdx.graphics.getWidth() - 50, 0.0f, new Texture("CocotteRight.png"), 20));
       
     }
   }
