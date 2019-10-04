@@ -7,9 +7,11 @@ import fr.valarep.valaga.Valaga;
 public class DesktopLauncher {
 	public static void main (String[] arg) {
 		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
-		config.width = 800;
-		config.height = 600;
-		config.resizable = true;
+		config.title = "Save Zelda !!";
+		config.width = 1920;
+		config.height = 1080;
+		config.fullscreen = true;
+		config.backgroundFPS = 30;
 		new LwjglApplication(new Valaga(), config);
 	}
 }
