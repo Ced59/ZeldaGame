@@ -1,7 +1,6 @@
 package fr.valarep.valaga;
 
 import java.util.ArrayList;
-
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Music;
@@ -57,7 +56,7 @@ public class Valaga extends ApplicationAdapter {
     batch = new SpriteBatch();
     link = new Hero(0.0f, 0.0f, new Texture("LinkRight.png"), 10);
     zelda = new Goal(Gdx.graphics.getWidth() - 60, Gdx.graphics.getHeight() - 100, new Texture("zelda.png"), 10);
-    
+
     cocottes = new ArrayList<Enemy>();
     cocottes.add(new Enemy(0.0f, Gdx.graphics.getHeight() - 50, new Texture("CocotteRight.png"), 20));
     cocottes.add(new Enemy(Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2, new Texture("CocotteRight.png"), 20));
