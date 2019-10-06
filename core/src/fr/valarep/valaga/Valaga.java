@@ -50,16 +50,19 @@ public class Valaga extends ApplicationAdapter {
     evilLaught.setLooping(false);
     chicken = Gdx.audio.newSound(Gdx.files.internal("sounds/chicken.wav"));
     chicken.play();
+
     gameOver = false;
+
     backgroundColor = Color.GOLD;
     batch = new SpriteBatch();
     link = new Hero(0.0f, 0.0f, new Texture("LinkRight.png"), 10);
     zelda = new Goal(Gdx.graphics.getWidth() - 60, Gdx.graphics.getHeight() - 100, new Texture("zelda.png"), 10);
-    cocottes = new ArrayList<Enemy>();
     
+    cocottes = new ArrayList<Enemy>();
     cocottes.add(new Enemy(0.0f, Gdx.graphics.getHeight() - 50, new Texture("CocotteRight.png"), 20));
     cocottes.add(new Enemy(Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2, new Texture("CocotteRight.png"), 20));
     cocottes.add(new Enemy(Gdx.graphics.getWidth() - 50, 0.0f, new Texture("CocotteRight.png"), 20));
+
     font = new BitmapFont();
     font2 = new BitmapFont();
     lvl = 1;
@@ -163,7 +166,7 @@ public class Valaga extends ApplicationAdapter {
     reload.addListener(new ClickListener(){     
       @Override
       public void clicked(InputEvent event, float x, float y) {
-        
+
         evilLaught.stop();
         create();
       }
