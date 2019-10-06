@@ -4,6 +4,8 @@ import java.util.ArrayList;
 
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Music;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
@@ -22,18 +24,33 @@ public class Valaga extends ApplicationAdapter {
   Hero link;
   Goal zelda;
   ArrayList<Enemy> cocottes;
-  boolean gameOver = false;
+  boolean gameOver;
   Skin buttonSkin;
   Button reload;
   Stage stage;
   int lvl;
   BitmapFont font;
+  BitmapFont font2;
+  Music mainTheme;
+  Sound soundGoal;
+  Music evilLaught;
+  Sound chicken;
   
   static Color backgroundColor = Color.GOLD;
   
   @Override
   public void create() {
     
+    mainTheme = Gdx.audio.newMusic(Gdx.files.internal("sounds/maintheme.wav"));
+    mainTheme.setLooping(true);
+    mainTheme.play();
+    mainTheme.setVolume(0.5f);
+    soundGoal = Gdx.audio.newSound(Gdx.files.internal("sounds/cloche.wav"));
+    evilLaught = Gdx.audio.newMusic(Gdx.files.internal("sounds/devilLaught.wav"));
+    evilLaught.setLooping(false);
+    chicken = Gdx.audio.newSound(Gdx.files.internal("sounds/chicken.wav"));
+    chicken.play();
+    gameOver = false;
     backgroundColor = Color.GOLD;
     batch = new SpriteBatch();
     link = new Hero(0.0f, 0.0f, new Texture("LinkRight.png"), 10);
@@ -44,6 +61,7 @@ public class Valaga extends ApplicationAdapter {
     cocottes.add(new Enemy(Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2, new Texture("CocotteRight.png"), 20));
     cocottes.add(new Enemy(Gdx.graphics.getWidth() - 50, 0.0f, new Texture("CocotteRight.png"), 20));
     font = new BitmapFont();
+    font2 = new BitmapFont();
     lvl = 1;
   }
   
@@ -99,7 +117,8 @@ public class Valaga extends ApplicationAdapter {
       
       link = new Hero(0.0f, 0.0f, new Texture("LinkRight.png"), 10);
       
-      
+      soundGoal.play();
+
       cocottes.add(new Enemy(0.0f, Gdx.graphics.getHeight() - 50, new Texture("CocotteRight.png"), 20));
       cocottes.add(new Enemy(Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2, new Texture("CocotteRight.png"), 20));
       cocottes.add(new Enemy(Gdx.graphics.getWidth() - 50, 0.0f, new Texture("CocotteRight.png"), 20));
@@ -120,11 +139,19 @@ public class Valaga extends ApplicationAdapter {
       gameOver();
     } else {
       perso.draw(batch);
+      
+      batch.begin();
+      font2.draw(batch, "Vous êtes au niveau " + lvl, 10, 200);
+      batch.end();
     }
   }
   
   private void gameOver() {
     
+    mainTheme.stop();
+    chicken.stop();
+    evilLaught.play();
+
     Skin buttonSkin = new Skin(Gdx.files.internal("skin/glassy/skin/glassy-ui.json"));
     
     
@@ -136,7 +163,8 @@ public class Valaga extends ApplicationAdapter {
     reload.addListener(new ClickListener(){     
       @Override
       public void clicked(InputEvent event, float x, float y) {
-        gameOver = false;
+        
+        evilLaught.stop();
         create();
       }
     });
@@ -148,7 +176,7 @@ public class Valaga extends ApplicationAdapter {
     quit.addListener(new ClickListener(){     
       @Override
       public void clicked(InputEvent event, float x, float y) {
-        gameOver = true;
+        
         dispose();
       }
     });
@@ -162,7 +190,7 @@ public class Valaga extends ApplicationAdapter {
     
     Texture ganondorf = new Texture("Ganondorf2.png");
     Texture gameOver = new Texture("game_over.jpg");
-
+    
     font.draw(batch, "Vous avez atteint le niveau " + lvl, 10, 200);
     
     Gdx.gl.glClearColor(backgroundColor.r, backgroundColor.g, backgroundColor.b, backgroundColor.a);
